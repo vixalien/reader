@@ -1,13 +1,15 @@
 {
-  "name": "one",
+  "name": "@reader-app/one",
   "version": "1.0.0",
-  "description": "",
+  "description": "A library to generate simple HTML (Reader View) from Complex sites",
   "main": "index.js",
   "dependencies": {
-    "node-readability": "file:../readability",
+    "@mozilla/readability": "^0.4.1",
+    "jsdom": "^16.4.0",
     "sanitize-html": "^2.3.2",
     "typography": "^0.16.19"
   },
+  "main": "index.js",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
