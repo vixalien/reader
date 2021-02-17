@@ -5,11 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "@mozilla/readability": "^0.4.1",
+    "htmlmetaparser": "^2.1.1",
     "jsdom": "^16.4.0",
-    "sanitize-html": "^2.3.2",
-    "typography": "^0.16.19"
+    "sanitize-html": "^2.3.2"
   },
-  "main": "index.js",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
