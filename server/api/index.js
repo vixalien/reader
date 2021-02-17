@@ -3,6 +3,18 @@ const fetch = require('node-fetch');
 var bodyParser = require('body-parser')
 const read = require('one');
 
+function fetchTimeout(...data) {
+	return new Promise((resolve, reject) => {
+		let timeout = setTimeout(() => reject('Fetching the page timed out after 20 seconds'), 20000);
+		fetch(...data)
+			.then((...result) => {
+				clearTimeout(timeout);
+				resolve(...result);
+			})
+			.catch(reject)
+	})
+}
+
 app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,14 +36,14 @@ app.get('/simple', async (req, res) => {
 		res.json({ ok: false, error: "INVALIDURL", detail: "An error occurred while parsing the given URL: " + err.toString() })
 	}
 	await fetch(url.href)
-		.then(data => data.text())
-		.then(text => read(text))
-		.then(simple => {
-			console.log('simple', simple)
-			res.send(simple)
+		.then(response => response.text())
+		.then(complexText => read(complexText, url.href))
+		.then(article => {
+			res.json({ ok: true, data: article })
 		})
 		.catch(err => {
-			return { ok: false, error: "UNPARSEABELEURL", detail: "An error occured while loading/parsing the URL: " + err.toString() }
+			console.log(err);
+			res.json({ ok: false, error: "UNPARSEABELEURL", detail: "An error occured while loading/parsing the URL: " + err.toString() })
 		})
 })
 
