@@ -32,6 +32,8 @@ let parse = async (content, url) => {
     article.excerpt = article.excerpt.substr(0, 170).replace(/ (\S)$/, '')
   }
 
+  article.url = url;
+
 	return article;
 }
 
